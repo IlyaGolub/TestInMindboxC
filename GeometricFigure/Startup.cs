@@ -23,8 +23,9 @@ namespace GeometricFigure
             services.AddControllers();
             services.AddDbContext<GeometricFigureContext>(options =>
             {
-                options.UseSqlite(Configuration.GetConnectionString(""));
+                options.UseSqlite(Configuration.GetConnectionString("SqLite"));
             });
+            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,8 +36,13 @@ namespace GeometricFigure
                 app.UseDeveloperExceptionPage();
             }
             context.Database.Migrate();
-            app.UseHttpsRedirection();
 
+            app.UseSwagger();
+            app.UseHttpsRedirection();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
             app.UseRouting();
 
             app.UseAuthorization();
@@ -45,6 +51,7 @@ namespace GeometricFigure
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }

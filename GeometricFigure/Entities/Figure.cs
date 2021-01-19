@@ -8,13 +8,12 @@ namespace GeometricFigure.Entities
     public class Figure
     {
         public int Id { get; set; }
-        public int SideA{ get; set; }
-        public int SideB { get; set; }
-        public int? SideС { get; set; }
-        public int? SideD { get; set; }
-        public int? Кadius { get; set; }
-        public int? Square { get; set; }
-        public int? Perimeter { get; set; }
+        public double? SideA { get; set; }
+        public double? SideB { get; set; }
+        public double? SideС { get; set; }   
+        public double? Radius { get; set; }
+        public double? Square { get; set; }
+        public double? Perimeter { get; set; }
         public string Name { get; set; }
     }
 }

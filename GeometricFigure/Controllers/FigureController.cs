@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GeometricFigure.DTO;
+using GeometricFigure.Entities;
+using GeometricFigure.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -10,23 +13,33 @@ namespace GeometricFigure.Controllers
     [ApiController]
     [Route("[controller]")]
     public class FigureController : ControllerBase
-    {     
-
-        public FigureController()
+    {
+        private readonly IFigureService figureService;
+        public FigureController(IFigureService figureService)
         {
-          
+            this.figureService = figureService;
         }
 
         [HttpPost("figure")]
-        public void GetFigure()
+        public async Task<ActionResult> SetFigureAsync([FromBody]FigureDTO figure)
         {
-           
+            try
+            {
+                figureService.SetFigure(figure);
+                return Ok();
+            }
+            catch (Exception)
+            {
+
+                return BadRequest("Ошибка добавления фигуры");
+            }           
+            
         }
 
         [HttpGet("figure/{id}")]
-        public void GetFigureId()
+        public ActionResult GetFigureId()
         {
-          
+            return Ok();
         }
     }
 }
