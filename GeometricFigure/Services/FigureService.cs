@@ -3,6 +3,7 @@ using GeometricFigure.Entities;
 using GeometricFigure.Infrastructure;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -33,7 +34,7 @@ namespace GeometricFigure.Services
                         Name = figure.Name,                       
                         Square = square,                       
                     };
-                    var resultFigure = repository.Add(newFigure);
+                    var resultFigure = await repository.Add(newFigure);
                     
                     return resultFigure.Id;
 
@@ -52,7 +53,7 @@ namespace GeometricFigure.Services
                         Square = square,
                         Perimeter = perimeter
                     };
-                    var resultFigure = repository.Add(newFigure);
+                    var resultFigure = await repository.Add(newFigure);
 
                     return resultFigure.Id;
                 }
@@ -64,6 +65,10 @@ namespace GeometricFigure.Services
             }
             return 0;
             
+        }
+        public async Task<Figure> GetFigure(int Id)
+        {
+           return await repository.All().FirstOrDefaultAsync(x => x.Id == Id);
         }
 
     }

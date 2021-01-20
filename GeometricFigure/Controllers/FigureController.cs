@@ -37,9 +37,19 @@ namespace GeometricFigure.Controllers
         }
 
         [HttpGet("figure/{id}")]
-        public ActionResult GetFigureId()
+        public async Task<ActionResult>  GetFigureId(int Id)
         {
-            return Ok();
+            try
+            {
+                var result = await figureService.GetFigure(Id);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+
+                return BadRequest($"Фигура с данным Id ={Id} не найдена");
+            }
+            
         }
     }
 }
