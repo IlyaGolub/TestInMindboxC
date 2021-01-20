@@ -30,24 +30,22 @@ namespace GeometricFigure.Controllers
             }
             catch (Exception)
             {
-
                 return BadRequest("Ошибка добавления фигуры");
             }           
             
         }
 
-        [HttpGet("figure/{id}")]
-        public async Task<ActionResult>  GetFigureId(int Id)
+        [HttpGet("{Id}")]
+        public async Task<ActionResult> GetFigureId([FromRoute] int Id)
         {
             try
             {
-                var result = await figureService.GetFigure(Id);
+                var result = figureService.GetFigure(Id);
                 return Ok(result);
             }
             catch (Exception)
-            {
-
-                return BadRequest($"Фигура с данным Id ={Id} не найдена");
+            {               
+               return BadRequest($"Фигура с данным Id ={Id} не найдена");
             }
             
         }

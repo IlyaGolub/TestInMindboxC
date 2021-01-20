@@ -7,6 +7,6 @@ namespace GeometricFigure.Services
     public interface IFigureService
     {
         Task<int> SetFigure(FigureDTO figure);
-        Task<Figure> GetFigure(int Id);
+        Figure GetFigure(int Id);
     }
 }

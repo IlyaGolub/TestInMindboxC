@@ -66,9 +66,10 @@ namespace GeometricFigure.Services
             return 0;
             
         }
-        public async Task<Figure> GetFigure(int Id)
+        public Figure  GetFigure(int Id)
         {
-           return await repository.All().FirstOrDefaultAsync(x => x.Id == Id);
+     
+            return repository.All().AsNoTracking().FirstOrDefault(x => x.Id == Id);
         }
 
     }
