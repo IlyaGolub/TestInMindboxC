@@ -36,7 +36,7 @@ namespace GeometricFigure.Controllers
         }
 
         [HttpGet("{Id}")]
-        public async Task<ActionResult> GetFigureId([FromRoute] int Id)
+        public ActionResult GetFigureId([FromRoute] int Id)
         {
             try
             {
