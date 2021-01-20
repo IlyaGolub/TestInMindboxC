@@ -16,33 +16,34 @@ namespace GeometricFigure.Services
             this.repository = repository;
         }
 
-        public void SetFigure(FigureDTO figure)
+        public async Task<int> SetFigure(FigureDTO figure)
         {
-            double square = 0;            
-            double perimeter = 0;
+          
             if (figure.TypeFigure == 1 && (figure.SideB.HasValue || figure.SideС.HasValue || figure.SideС.HasValue))
             {
-                return;
+                return 0;
             }
             try
             {
                 if (figure.TypeFigure == 0 && figure.Radius.HasValue)
                 {
-                    square = Math.PI * Math.Pow(figure.Radius.Value, 2);
-                    var result = new Figure
+                    var square = Math.PI * Math.Pow(figure.Radius.Value, 2);
+                    var newFigure = new Figure
                     {
                         Name = figure.Name,                       
                         Square = square,                       
                     };
-                    repository.Add(result);
-                   
+                    var resultFigure = repository.Add(newFigure);
+                    
+                    return resultFigure.Id;
+
                 }
                 else if (figure.TypeFigure == 1 && figure.SideB.HasValue && figure.SideС.HasValue && figure.SideС.HasValue)
                 {
                     var p = (figure.SideB.Value + figure.SideС.Value + figure.SideС.Value) / 2;
-                    perimeter = (figure.SideB.Value + figure.SideС.Value + figure.SideС.Value);
-                    square = Math.Sqrt(p * (p - figure.SideB.Value) * (p - figure.SideС.Value) * (p - figure.SideС.Value));
-                    var result = new Figure
+                    var perimeter = (figure.SideB.Value + figure.SideС.Value + figure.SideС.Value);
+                    var square = Math.Sqrt(p * (p - figure.SideB.Value) * (p - figure.SideС.Value) * (p - figure.SideС.Value));
+                    var newFigure = new Figure
                     {
                         Name = figure.Name,
                         SideA = figure.SideA,
@@ -51,8 +52,9 @@ namespace GeometricFigure.Services
                         Square = square,
                         Perimeter = perimeter
                     };
-                    repository.Add(result);
-                  
+                    var resultFigure = repository.Add(newFigure);
+
+                    return resultFigure.Id;
                 }
             }
             catch (Exception)
@@ -60,6 +62,7 @@ namespace GeometricFigure.Services
 
                 throw;
             }
+            return 0;
             
         }
 

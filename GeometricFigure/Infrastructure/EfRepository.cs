@@ -21,15 +21,18 @@ namespace GeometricFigure.Infrastructure
             return context.Set<T>();
         }
 
-        public T Add(T entity)
+        public async Task<T> Add(T entity)
         {
             context.Set<T>().Add(entity);
+            await SaveAsync();
             return entity;
         }
 
-        public T Update(T prev, T current)
+        public async Task<T> Update(T prev, T current)
         {
             context.Entry<T>(prev).CurrentValues.SetValues(current);
+            await SaveAsync();
+
             return current;
         }
 

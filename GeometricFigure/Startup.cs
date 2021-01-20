@@ -1,4 +1,5 @@
 using GeometricFigure.Infrastructure;
+using GeometricFigure.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,10 @@ namespace GeometricFigure
             {
                 options.UseSqlite(Configuration.GetConnectionString("SqLite"));
             });
+            
+            services.AddScoped<IFigureService, FigureService>();
+
+            services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddSwaggerGen();
         }
 

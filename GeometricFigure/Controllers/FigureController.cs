@@ -25,8 +25,8 @@ namespace GeometricFigure.Controllers
         {
             try
             {
-                figureService.SetFigure(figure);
-                return Ok();
+                var resultId = await figureService.SetFigure(figure);
+                return Ok($"Id вашей фигуры {resultId}");;
             }
             catch (Exception)
             {
