@@ -31,7 +31,8 @@ namespace GeometricFigure.Controllers
             }
             catch (Exception)
             {
-                return BadRequest("Ошибка добавления фигуры");
+                throw;
+            
             }           
             
         }
