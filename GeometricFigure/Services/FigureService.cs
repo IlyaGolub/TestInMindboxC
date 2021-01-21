@@ -19,16 +19,17 @@ namespace GeometricFigure.Services
 
         public async Task<int> SetFigure(FigureDTO figure)
         {
-          
-            if (figure.TypeFigure == 1 && (figure.SideB.HasValue || figure.SideС.HasValue || figure.SideС.HasValue))
+            if (figure.Radius.Value == 0 && (figure.SideB.Value == 0 || figure.SideA.Value == 0 || figure.SideС.Value == 0))
+
+                if (figure.Radius.Value != 0 && (figure.SideB.HasValue || figure.SideA.HasValue || figure.SideС.HasValue))
             {
                 return 0;
             }
             try
             {
-                if (figure.TypeFigure == 0 && figure.Radius.HasValue)
+                if (figure.Radius.HasValue && figure.Radius.Value != 0)
                 {
-                    var square = Math.PI * Math.Pow(figure.Radius.Value, 2);
+                    double square = Math.PI * Math.Pow(figure.Radius.Value, 2);
                     var newFigure = new Figure
                     {
                         Name = figure.Name,                       
@@ -39,11 +40,16 @@ namespace GeometricFigure.Services
                     return resultFigure.Id;
 
                 }
-                else if (figure.TypeFigure == 1 && figure.SideB.HasValue && figure.SideС.HasValue && figure.SideС.HasValue)
+                else if ( figure.SideB.HasValue && figure.SideС.HasValue && figure.SideС.HasValue)
                 {
-                    var p = (figure.SideB.Value + figure.SideС.Value + figure.SideС.Value) / 2;
-                    var perimeter = (figure.SideB.Value + figure.SideС.Value + figure.SideС.Value);
-                    var square = Math.Sqrt(p * (p - figure.SideB.Value) * (p - figure.SideС.Value) * (p - figure.SideС.Value));
+                    double a = figure.SideB.Value;
+                    double b = figure.SideA.Value;
+                    double c = figure.SideС.Value;
+                    var sum = a + b + c;
+                    var d = sum / 2;
+                    double p = (figure.SideB.Value + figure.SideA.Value + figure.SideС.Value) % 2;
+                    double perimeter = (figure.SideB.Value + figure.SideA.Value + figure.SideС.Value);
+                    double square = Math.Sqrt(p * (p - figure.SideB.Value) * (p - figure.SideС.Value) * (p - figure.SideС.Value));
                     var newFigure = new Figure
                     {
                         Name = figure.Name,

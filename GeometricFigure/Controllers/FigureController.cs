@@ -26,6 +26,7 @@ namespace GeometricFigure.Controllers
             try
             {
                 var resultId = await figureService.SetFigure(figure);
+                if (resultId == 0) return BadRequest("В треугольнике или круге не может быть стороны и радиуса");
                 return Ok($"Id вашей фигуры {resultId}");;
             }
             catch (Exception)

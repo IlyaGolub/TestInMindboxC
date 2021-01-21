@@ -11,7 +11,6 @@ namespace GeometricFigure.DTO
         public int? SideA { get; set; }
         public int? SideB { get; set; }
         public int? SideС { get; set; }
-        public int? Radius { get; set; }  
-        public int TypeFigure { get; set; }
+        public int? Radius { get; set; }     
     }
 }
