@@ -41,12 +41,7 @@ namespace GeometricFigure.Services
 
                 }
                 else if ( figure.SideB.HasValue && figure.SideС.HasValue && figure.SideС.HasValue)
-                {
-                    double a = figure.SideB.Value;
-                    double b = figure.SideA.Value;
-                    double c = figure.SideС.Value;
-                    var sum = a + b + c;
-                    var d = sum / 2;
+                {                   
                     double p = (figure.SideB.Value + figure.SideA.Value + figure.SideС.Value) / 2;
                     double perimeter = (figure.SideB.Value + figure.SideA.Value + figure.SideС.Value);
                     double square = Math.Sqrt(p * (p - figure.SideB.Value) * (p - figure.SideA.Value) * (p - figure.SideС.Value));
